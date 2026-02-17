@@ -172,8 +172,15 @@ document.getElementById("saveStart").onclick = () => {
     document.getElementById("adminMsg").textContent = "開始日が正しくありません";
     return;
   }
+ 
+ /* ====== 追加：開始日変更時に読了者リストもリセット ====== */
   localStorage.setItem("startDate", newDate);
-  document.getElementById("adminMsg").textContent = "開始日を変更しました（再読み込みしてください）";
+  localStorage.setItem("readers", JSON.stringify([]));  
+  readers = [];
+  renderReaders();
+
+  document.getElementById("adminMsg").textContent =
+    "開始日と読了者リストをリセットしました（再読み込みしてください）";
 };
 
 /* ========== Navigation ========== */
@@ -187,3 +194,4 @@ document.querySelectorAll("nav button").forEach(btn => {
 
 </body>
 </html>
+
